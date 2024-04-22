@@ -50,7 +50,10 @@ int main(int argc, char *argv[])
     QApplication a(argc, argv);
     Logger::singleton();
     a.setWindowIcon(QIcon(":/images/icon/mpc-qt.svg"));
-
+ 
+    if (!qEnvironmentVariableIsEmpty("FLATPAK_ID"))
+        QGuiApplication::setDesktopFileName("io.github.mpc_qt.Mpc-Qt");
+    
     // The wayland plugin as of writing this (c. 2018-04) defaults
     // to a 16bit color surface, so ask for the standard 32bit one.
     if (a.platformName().contains("wayland")) {
